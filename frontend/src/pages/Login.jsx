@@ -68,23 +68,7 @@ const Login = () => {
           all from one account.
         </p>
 
-        <div className="mt-8">
-          <h2 className="text-sm font-semibold text-slate-700">Demo accounts</h2>
-          <p className="mt-1 text-xs text-slate-500">Click to autofill credentials.</p>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {DEMO_ACCOUNTS.map((account) => (
-              <button
-                key={account.email}
-                type="button"
-                onClick={() => fillDemoAccount(account)}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-left transition hover:border-primary-300 hover:bg-primary-50"
-              >
-                <p className="text-xs font-semibold text-slate-700">{account.role}</p>
-                <p className="mt-0.5 truncate text-[11px] text-slate-500">{account.email}</p>
-              </button>
-            ))}
-          </div>
-        </div>
+       
       </div>
 
       <div className="w-full max-w-md">
