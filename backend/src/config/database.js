@@ -1,16 +1,28 @@
+
 const { Pool } = require('pg');
+
 require('dotenv').config();
 
 const pool = new Pool({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'public_damage_db',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'Subhanshu$175',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT) || 5432,
+  database: process.env.DB_NAME || 'neondb',
+  user: process.env.DB_USER || 'neondb_owner',
+  password: process.env.DB_PASSWORD,
+
+  // Enable SSL for the hosted Neon PostgreSQL database
+  ssl: process.env.DB_HOST
+    ? { rejectUnauthorized: false }
+    : false,
 });
 
 pool.connect()
-  .then(() => console.log('Connected to PostgreSQL database'))
-  .catch(err => console.error('Database connection error:', err));
+  .then((client) => {
+    console.log('Connected to PostgreSQL database');
+    client.release();
+  })
+  .catch((err) => {
+    console.error('Database connection error:', err.message);
+  });
 
 module.exports = pool;
